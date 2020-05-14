@@ -1,0 +1,6 @@
+img {
+    width: 300px;
+    height: 300px !important;
+    object-fit: cover;
+    filter: grayscale(1);
+}

@@ -1,0 +1,29 @@
+{% extends "./index.html" %}
+{% block content %}
+<div class="uk-flex uk-flex-column">
+  {% if all_voting_list %}
+  <div class="uk-flex uk-flex-column uk-margin">
+    <h3>Активныe</h3>
+    <div class="uk-flex uk-flex-column">
+      {% for voting in all_voting_list %}
+        {% if voting.is_active %}
+          {% include "./active_content.html" %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="uk-margin uk-flex uk-flex-column">
+    <h3>Завершённые</h3>
+    <div class="uk-flex uk-flex-column">
+      {% for voting in all_voting_list %}
+        {% if not voting.is_active %}
+          {% include "./finished_content.html" %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+    <div>Нет голосований</div>
+  {% endif %}
+</div>
+{% endblock %}

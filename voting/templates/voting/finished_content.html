@@ -1,0 +1,30 @@
+{% block content %}
+<div class="uk-flex uk-flex-column uk-margin">
+  <h3><a href="{{ voting.pk }}" class="uk-link-heading">Голосование: {{ voting.name }}</a></h3>
+  <div voting_id={{ voting.pk }} uk-grid>
+    {% for item in voting.vote_set.all %}
+      {% for person in voting.persons.all %}
+        {% if person.pk == item.person_id %}
+        <div>
+          <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top">
+              <img width="300" height="300" src="{{ MEDIA_URL }}{{ person.image_source }}">
+            </div>
+            <div class="uk-card-body">
+              {% if person.pk == voting.leader_id %}
+                <div class="uk-card-title">ПОБЕДИТЕЛЬ</div>
+              {% endif %}
+              <ul class="uk-list">
+                <li>Имя: {{ person.name }}</li>
+                <li>Возраст: {{ person.age }}</li>
+                <li>Голосов: {{ item.number_of_votes }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
